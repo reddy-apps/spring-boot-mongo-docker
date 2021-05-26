@@ -1,0 +1,30 @@
+version: "3.1"
+services:
+  springapp:
+   image: gsreddydocker4546/spring-boot-mong:1
+   ports:
+   - 8080:8080
+   container_name: springappcontainer
+   networks:
+   - spingnetwork
+   environment:
+   - MONGO_DB_HOSTNAME=mongo
+   - MONGO_DB_USERNAME=mongodb
+   - MONGO_DB_PASSWORD=admin123
+   restart: always
+  mongo:
+   image: mongo
+   container_name: mongo
+   volumes:
+   - mongodbdata:/data/db
+   networks:
+   - spingnetwork
+   environment:
+   - MONGO_DB_USERNAME=mongodb
+   - MONGO_DB_PASSWORD=admin123
+volumes:
+  mongodbdata:
+    driver: local
+networks:
+    spingnetwork:
+
